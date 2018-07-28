@@ -12,7 +12,7 @@ let rentalObj = (function(){
 
 	return {
 		add(data){
-			if (data.indexOf('hz.58.com') < 0) return;/*暂时屏蔽会跳转的URL*/
+			if (data.indexOf('sh.58.com') < 0) return;/*暂时屏蔽会跳转的URL*/
 			rentalSet.add(data);
 			callBackFunc && callBackFunc(data);
 		},
@@ -23,6 +23,9 @@ let rentalObj = (function(){
 
 		unRegister(){
 			callBackFunc = function(){};
+		},
+		localStorageData(){
+			return ''
 		}
 	}
 })();
@@ -57,6 +60,7 @@ let rentalInfosObj = (function(){
 	/*根据url访问并解析返回值*/
 	function analysis(url){
 		let html = '';
+		url = "http:"+url;
 		http.get(url, function(res){
 			res.on('data', function(chuck){
 				html += chuck;
@@ -69,7 +73,7 @@ let rentalInfosObj = (function(){
 					$('a.c_333') && $('a.c_333')['0'] 
 					&& rentalInfosMap.set(url, {
 						tel: $('span.tel-num.tel-font').text(),
-						price: $('.house-price').text(),
+						price: $('b.f36').text(),
 						location: $('a.c_333')[0].children[0].data,
 						img: $('#smainPic')['0'].attribs.src,
 					})
@@ -106,7 +110,7 @@ let rentalInfosObj = (function(){
 *函数返回值 ：url
 ***********************************************************************************************/
 function getUrl(page = 1){
-	return  'http://hz.58.com/chuzu/pn'+page+'/?key=%E6%9D%AD%E5%B7%9E%E7%A7%9F%E6%88%BF%E5%AD%90&cmcskey=%E7%A7%9F%E6%88%BF%E5%AD%90&final=1&PGTID=0d3090a7-0004-f43c-ee04-95c2ea3d031f&ClickID=6';
+	return  'http://sh.58.com/chuzu/pn'+page+'/?key=%E4%B8%8A%E6%B5%B7%E7%A7%9F%E6%88%BF%E5%AD%90&cmcskey=%E7%A7%9F%E6%88%BF%E5%AD%90&final=1&PGTID=0d3090a7-0004-f43c-ee04-95c2ea3d031f&ClickID=6';
 }
 
 /***********************************************************************************************
@@ -149,8 +153,13 @@ function getRentalInfosByUrl(url){
 
 module.exports = {
 	init(){
-		updateRentalUrl();	
+		// let localData = rentalObj.localStorageData();
+
+		// if(localData['count']<100){
+		updateRentalUrl();
 		rentalObj.register(getRentalInfosByUrl);
+		// }
+
 	},
 
 	getRentalInfos(req, res, next){

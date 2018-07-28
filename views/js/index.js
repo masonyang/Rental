@@ -1,7 +1,12 @@
-(function(){
+// (function(){
+
 	function getInfosSuc(data){
+		var map = new BMap.Map("container");          // 创建地图实例  
+		map.centerAndZoom("上海", 12);
 		var params = data.params;
 		var szPois = [];
+		var html = '';	
+		var unquie=[];	
 		for(var url in params){
 			var localSearch = new BMap.LocalSearch(map);
 			localSearch.setSearchCompleteCallback((function(url, infos){
@@ -23,10 +28,12 @@
 						};
 					}
 
+					// console.info(szPois);
 					if (isHasPoi) {/*同一个小区有多套房子*/
 						var point = new BMap.Point(poi.point.lng,poi.point.lat);
 						szPois[i].urls.push(url);
 						szPois[i].imgs.push(infos.img);
+						szPois[i].prices.push(infos.price);
 						szPois[i].marker.addEventListener("click", (function(p){
 							return function(){   
 								/*点击房屋图标后弹出的信息框*/
@@ -38,7 +45,7 @@
 								}
 								var message = "";
 								p.urls.forEach(function(item,index){
-									message += "<div><a href="+item+"><img title='点击访问' class='img-responsive showImg' alt='Responsive image' src="+p.imgs[index]+"></img></a></div>"
+									message += "<div>"+poi.address+"<br><a href="+item+" target='_blank'><img title='点击访问' class='img-responsive showImg' alt='Responsive image' src="+p.imgs[index]+"></img></a></div>"
 								})
 								var infoWindow = new BMap.InfoWindow(message, opts);       
 								map.openInfoWindow(infoWindow,point); //开启信息窗口
@@ -61,20 +68,37 @@
 							  	title : poi.title , 
 							  	enableMessage:true,
 							}
-							var infoWindow = new BMap.InfoWindow("<a href="+url+"><img title='点击访问' class='img-responsive showImg' alt='Responsive image' src="+infos.img+"></img></a>", opts);       
+							var infoWindow = new BMap.InfoWindow(poi.address+"<br><a href="+url+" target='_blank'><img title='点击访问' class='img-responsive showImg' alt='Responsive image' src="+infos.img+"></img></a>", opts);       
 							map.openInfoWindow(infoWindow,point); //开启信息窗口
 						});
 
 						poi.marker = marker;
 						poi.urls = [url];
 						poi.imgs = [infos.img]
+						poi.prices = [infos.price]
 						szPois.push(poi);
-					}  
+				}  
+				// console.info(szPois);
+				for(var i=0;i<szPois.length;i++){
+					if($.inArray(szPois[i].title,unquie)==-1){
+						html += '<li class="direction_map" onclick="showArea(this);" surl="'+szPois[i].urls[0]+'" address="'+szPois[i].address+'" lng="'+szPois[i].point.lng+'" lat="'+szPois[i].point.lat+'" stitle="'+szPois[i].title+'" simg="'+szPois[i].imgs[0]+'"><small>'+szPois[i].title+'</small><span class="distance">'+szPois[i].prices[0]+'元</span><div class="number"><span></span><img style="width:100px;height:100px;" src="'+szPois[i].imgs[0]+'"></div></li>';
+						// console.info(html);
+						// if (szPois[i].point.lng === poi.point.lng && szPois[i].point.lat === poi.point.lat) {
+						// 	isHasPoi = true;
+						// 	break;
+						// };
+						unquie.push(szPois[i].title);
+					}
 
+				}
+
+				$('#location-results').html(html);
 			　　}
+
 			})(url, params[url]));
 			localSearch.search(params[url].location);
 		}
+
 	}
 
 	function getInfosErr(e){
@@ -82,7 +106,7 @@
 	}
 
 	var map = new BMap.Map("container");          // 创建地图实例  
-	map.centerAndZoom("杭州", 12);
+	map.centerAndZoom("上海", 12);
 	map.enableScrollWheelZoom();   //启用滚轮放大缩小，默认禁用
 	map.enableContinuousZoom();    //启用地图惯性拖拽，默认禁用
 
@@ -99,15 +123,19 @@
 		}        
 	},{enableHighAccuracy: true})
 	
-	$.ajax({
-		'type': 'post',
-		'url': '/rental/getInfos',
-		'contentType': 'application/json;charset=utf-8',
-		'data': JSON.stringify({params: null}),
-		success: getInfosSuc ,
-		async: true,
-		error: getInfosErr ,
-	})
+	function initAjaxData(){
+		$.ajax({
+			'type': 'post',
+			'url': '/rental/getInfos',
+			'contentType': 'application/json;charset=utf-8',
+			'data': JSON.stringify({params: null}),
+			success: getInfosSuc ,
+			async: true,
+			error: getInfosErr ,
+		});
+	}
 
-	
-})();
+	initAjaxData();
+
+	// setInterval(initAjaxData,(1000*60*3));
+// })();

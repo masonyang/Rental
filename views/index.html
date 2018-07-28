@@ -13,10 +13,118 @@
 	  	<script type="text/javascript" src="js/jquery-3.0.0.js"></script>
 	  	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 	  	<script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-		
+	<link rel="stylesheet" type="text/css" href="css/stores.css">
+	<style type="text/css">.amap-indoor-map .label-canvas{position:absolute;top:0;left:0}.amap-indoor-map .highlight-image-con *{pointer-events:none}.amap-indoormap-floorbar-control{position:absolute;margin:auto 0;bottom:165px;right:12px;width:35px;text-align:center;line-height:1.3em;overflow:hidden;padding:0 2px}.amap-indoormap-floorbar-control .panel-box{background-color:rgba(255,255,255,.9);border-radius:3px;border:1px solid #ccc}.amap-indoormap-floorbar-control .select-dock{position:absolute;top:0;left:0;width:100%;box-sizing:border-box;height:30px;border:solid #4196ff;border-width:0 2px;border-radius:2px;pointer-events:none;background:linear-gradient(to bottom,#f6f8f9 0,#e5ebee 50%,#d7dee3 51%,#f5f7f9 100%)}.amap-indoor-map .transition{transition:opacity .2s},.amap-indoormap-floorbar-control .transition{transition:top .2s,margin-top .2s}.amap-indoormap-floorbar-control .select-dock:after,.amap-indoormap-floorbar-control .select-dock:before{content:"";position:absolute;width:0;height:0;left:0;top:10px;border:solid transparent;border-width:4px;border-left-color:#4196ff}.amap-indoormap-floorbar-control .select-dock:after{right:0;left:auto;border-left-color:transparent;border-right-color:#4196ff}.amap-indoormap-floorbar-control.is-mobile{width:37px}.amap-indoormap-floorbar-control.is-mobile .floor-btn{height:35px;line-height:35px}.amap-indoormap-floorbar-control.is-mobile .select-dock{height:35px;top:36px}.amap-indoormap-floorbar-control.is-mobile .select-dock:after,.amap-indoormap-floorbar-control.is-mobile .select-dock:before{top:13px}.amap-indoormap-floorbar-control.is-mobile .floor-list-box{height:105px}.amap-indoormap-floorbar-control .floor-list-item .floor-btn{color:#555;font-family:"Times New Roman",sans-serif,"Microsoft Yahei";font-size:16px}.amap-indoormap-floorbar-control .floor-list-item.selected .floor-btn{color:#000}.amap-indoormap-floorbar-control .floor-btn{height:28px;line-height:28px;overflow:hidden;cursor:pointer;position:relative;-webkit-touch-callout:none;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.amap-indoormap-floorbar-control .floor-btn:hover{background-color:rgba(221,221,221,.4)}.amap-indoormap-floorbar-control .floor-minus,.amap-indoormap-floorbar-control .floor-plus{position:relative;text-indent:-1000em}.amap-indoormap-floorbar-control .floor-minus:after,.amap-indoormap-floorbar-control .floor-plus:after{content:"";position:absolute;margin:auto;top:9px;left:0;right:0;width:0;height:0;border:solid transparent;border-width:10px 8px;border-top-color:#777}.amap-indoormap-floorbar-control .floor-minus.disabled,.amap-indoormap-floorbar-control .floor-plus.disabled{opacity:.3}.amap-indoormap-floorbar-control .floor-plus:after{border-bottom-color:#777;border-top-color:transparent;top:-3px}.amap-indoormap-floorbar-control .floor-list-box{max-height:153px;position:relative;overflow-y:hidden}.amap-indoormap-floorbar-control .floor-list{margin:0;padding:0;list-style:none}.amap-indoormap-floorbar-control .floor-list-item{position:relative}.amap-indoormap-floorbar-control .floor-btn.disabled,.amap-indoormap-floorbar-control .floor-btn.disabled *,.amap-indoormap-floorbar-control.with-indrm-loader *{-webkit-pointer-events:none!important;pointer-events:none!important}.amap-indoormap-floorbar-control .with-indrm-loader .floor-nonas{opacity:.5}.amap-indoor-map-moverf-marker{color:#555;background-color:#FFFEEF;border:1px solid #7E7E7E;padding:3px 6px;font-size:12px;white-space:nowrap;display:inline-block;position:absolute;top:1em;left:1.2em}.amap-indoormap-floorbar-control .amap-indrm-loader{-moz-animation:amap-indrm-loader 1.25s infinite linear;-webkit-animation:amap-indrm-loader 1.25s infinite linear;animation:amap-indrm-loader 1.25s infinite linear;border:2px solid #91A3D8;border-right-color:transparent;box-sizing:border-box;display:inline-block;overflow:hidden;text-indent:-9999px;width:13px;height:13px;border-radius:7px;position:absolute;margin:auto;top:0;left:0;right:0;bottom:0}@-moz-keyframes amap-indrm-loader{0%{-moz-transform:rotate(0);transform:rotate(0)}100%{-moz-transform:rotate(360deg);transform:rotate(360deg)}}@-webkit-keyframes amap-indrm-loader{0%{-webkit-transform:rotate(0);transform:rotate(0)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes amap-indrm-loader{0%{-moz-transform:rotate(0);-ms-transform:rotate(0);-webkit-transform:rotate(0);transform:rotate(0)}100%{-moz-transform:rotate(360deg);-ms-transform:rotate(360deg);-webkit-transform:rotate(360deg);transform:rotate(360deg)}}</style>
+
+	  	<link rel="stylesheet" href="css/map.css">
+
+		<style>
+			#location-results{
+				overflow-y: scroll;
+				height: 500px;
+				overflow: auto;
+				width: 100%;
+			}
+		    .tangram-suggestion table{width:100%;height:400px;overflow-y: auto;font-size:16px !important;margin-top: 10px !important;}
+		    .tangram-suggestion table tr td {
+		        overflow:scroll !important;
+		        height:42px !important;
+		        padding:0 10px !important;
+		        line-height:42px !important;
+		    }
+		    .tangram-suggestion .route-icon {
+		        overflow:hidden;
+		        padding-left:30px !important;
+		        font-style:normal;
+		        background:url(http://webmap1.map.bdstatic.com/wolfman/static/common/images/ui3/tools/suggestion-icon_013979b.png) no-repeat 0 -20px !important;
+		        background-size:25px 90px !important;
+		    }
+		    .tangram-suggestion-main {z-index: 9999999999;}
+		</style>
 	</head>  
-	<body>  
+	<body class="page-stores">  
+	<nav id="nav">
+		<div class="container">
+		<header class="header">
+		<div class="primary"></div>
+
+			<a class="icon trigger" rel="nav-overlay" id="nav-menu" title="刷新页面" href="javascript:void(0);">
+	          <img src="image/refresh.jpg" style="width: 40px;height: 40px;">
+	          <span>刷新页面</span>
+	        </a>
+		</header>
+
+		<div class="body">
+		<div id="react-store-locator-nav-secondary">
+		    <div class="StoreLocatoreContainer">
+		        <nav class="container">
+		            <div class="navbar">
+		                <div class="field search" style="margin-right:0px;">
+		                    <div class="StoreLocatorSearchInput"><input type="text" name="keyword" id="keyword" placeholder="输入地址查找房源信息" value="">
+		                        <img src="image/svg/icon-search.svg" _vimium-has-onclick-listener="">
+		<!--                                    <ul id="autocompletedList" class="locationOptions">-->
+		<!--                                        <li>没有找到相应结果</li>-->
+		<!--                                    </ul>-->
+		                    </div>
+		                </div>
+		            </div>
+
+		            <ul class="list" id="location-results">
+		                <li>没有找到相应结果</li>
+
+		            </ul>
+
+		        </nav>
+
+		        <div></div>
+		    </div>
+		</div>
+		</div>
+		</div>
+
+
+		<div id="react-store-locator-nav-overlay"></div>
+
+	</nav>
 		<div id="container"></div> 
 	</body>  
+	<script>
+	function showArea(obj){
+
+		$(".direction_map").removeClass("active");
+		$(obj).addClass("active");
+
+		var map = new BMap.Map("container");
+
+		var point = new BMap.Point($(obj).attr("lng"),$(obj).attr("lat"));
+
+		var myIcon = new BMap.Icon("../image/house.png", new BMap.Size(30, 30), {});      
+		// 创建标注对象并添加到地图   
+		var marker = new BMap.Marker(point, {icon: myIcon});   
+
+		map.centerAndZoom(point, 13);
+
+		map.addOverlay(marker);
+
+		marker.addEventListener("click", function(){    
+			/*点击房屋图标后弹出的信息框*/
+			var opts = {
+			  	width : 200,    
+			  	height: 200,     
+			  	title : $(obj).attr('stitle') , 
+			  	enableMessage:true,
+			}
+			var infoWindow = new BMap.InfoWindow($(obj).attr('address')+"<br><a href="+$(obj).attr('surl')+" target='_blank'><img title='点击访问' class='img-responsive showImg' alt='Responsive image' src="+$(obj).attr('simg')+"></img></a>", opts);       
+			map.openInfoWindow(infoWindow,point); //开启信息窗口
+		});
+
+	}
+	</script>
 	<script src="js/index.js" type="text/javascript"></script>
+
+	<script>
+		$('#nav-menu').click(function(){
+			initAjaxData();
+		});
+	</script>
 </html>
